@@ -1,0 +1,21 @@
+---
+version: "2.1"
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server # var nombreContainer
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Argentina/Buenos_Aires
+      - PASSWORD=HolaHola123! # var passwd
+      - HASHED_PASSWORD= # se puede hashear sin problema en node y guardar eso, de hecho es mejor.
+      - SUDO_PASSWORD=HolaHola123! # var passwd
+      - SUDO_PASSWORD_HASH= # lo mismo
+      - PROXY_DOMAIN=roosevelt.rapo.com.ar # hay que pensar. Puede ser todo el mismo puerto y con un proxy redirigir a otro subdominio.
+      - DEFAULT_WORKSPACE=/config/workspace # esto habria que ver si es lo mas comodo. Tambien hay que averiguar como instalar cosas ahi por default, calculo que forkeando el Dockerfile original...
+    volumes:
+      - "C:/Users/matir/AppData/Roaming/docker-volumes:/config" # esto hay que verlo..
+    ports:
+      - 8443:8443 # var port
+    restart: unless-stopped
